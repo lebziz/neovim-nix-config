@@ -7,16 +7,22 @@ This repository is a translation of a traditional Lua-based setup into the Nix e
 ## Installation
 
 ### Install on any Linux Distro with Nix
+```bash
 nix run github:lebziz/neovim-nix-config
+```
 
 ### Install via Home Manager (NixOS)
 Add this repository to your flake inputs and install the packages:
+```nix
 inputs.my-nixvim.url = "github:lebziz/neovim-nix-config";
+```
 
-# In your home.nix:
+In your home.nix:
+```nix
 home.packages = [
     inputs.my-nixvim.packages.${pkgs.system}.default
     inputs.my-nixvim.packages.${pkgs.system}.okular-nvr
 ];
+```
 
 ## Acknowledgements
