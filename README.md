@@ -17,7 +17,7 @@ Add this repository to your flake inputs and install the packages:
 inputs.my-nixvim.url = "github:lebziz/neovim-nix-config";
 ```
 
-In your home.nix:
+In your file where home manager is configured:
 ```nix
 home.packages = [
     inputs.my-nixvim.packages.${pkgs.system}.default
@@ -26,3 +26,4 @@ home.packages = [
 ```
 
 ## Acknowledgements
+The design, plugin selection, and keymaps for this configuration were heavily inspired by and ported from [Vizkid04](https://github.com/Vizkid04)'s Neovim configuration, which can be found [here](https://github.com/Vizkid04/My_nvim_config).
