@@ -6,7 +6,7 @@ pkgs.writeShellApplication {
 	runtimeInputs = [ pkgs.neovim-remote ];
 
 	text = ''
-		echo "$(date): args='$@'" >> /tmp/okular_nvr_debug.log
+		echo "$(date): args='$*'" >> /tmp/okular_nvr_debug.log
 		line="$1"
 		file="$2"
 		file="$(realpath --canonicalize-missing "$file" 2>/dev/null || printf '%s' "$file")"
@@ -17,7 +17,7 @@ pkgs.writeShellApplication {
 			[ -e "$sock" ] || continue
 			res="$(nvr --servername "$sock" --remote-expr "bufnr(''${file}')" 2>/dev/null || true)"
 			if [ -n "$res" ] && [ "$res" -gt 0 ] 2>/dev/null; then
-				nvr --servername "$sock" --remote-silent +''${line} "$file"
+				nvr --servername "$sock" --remote-silent +"''${line}" "$file"
 				exit 0
 			fi
 		done
@@ -26,16 +26,17 @@ pkgs.writeShellApplication {
 		for s in $servers; do
 			res="$(nvr --servername "$s" --remote-expr "bufnr(''${file}')" 2>/dev/null || true)"
 			if [ -n "$res" ] && [ "$res" -gt 0 ] 2>/dev/null; then
-				nvr --servername "$s" --remote-silent +''${line} "$file"
+				nvr --servername "$s" --remote-silent +"''${line}" "$file"
 				exit 0
 			fi
 		done
 		
-		first="$(ls /tmp/nvim-* 2>/dev/null | head -n1 || true)"
-		if [ -n "$first" ]; then
-			nvr --servername "$first" --remote-silent +''${line} "$file"
-			exit 0
-		fi
+        for first in /tmp/nvim-*; do
+            if [ -e "$first" ]; then
+                nvr --servername "$first" --remote-silent +"''${line}" "$file"
+                exit 0
+            fi
+        done
 		
 		echo "okular_nvr: no nvim socket found" >&2
 		exit 1
