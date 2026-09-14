@@ -7,9 +7,10 @@
     };
 
     outputs = { self, nixpkgs, nixvim, ... }: let
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
 
-        nixvimModule = nixvim.legacyPackages.x86_64-linux.makeNixvim {
+        nixvimModule = nixvim.legacyPackages.${system}.makeNixvim {
             imports = [
                 ./default.nix
             ];
@@ -18,7 +19,7 @@
         okularScript = import ./scripts/okular_nvr.nix { inherit pkgs; };
 
     in {
-        packages.x86_64-linux = {
+        packages.${system} = {
             default = nixvimModule;
             okular_nvr = okularScript;
         };
