@@ -1,4 +1,10 @@
+{ pkgs, ... }:
+
 {
+    plugins.vimtex = {
+        texlivePackage = pkgs.texliveFull;
+    };
+
     globals = {
         vimtex_view_method = "general";
         vimtex_view_general_viewer = "okular";
