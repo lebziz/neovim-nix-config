@@ -153,4 +153,8 @@
         enable = true;
         flavor = "carbonfox";
     };
+
+    extraPackages = [
+        pkgs.texliveFull
+    ];
 }
