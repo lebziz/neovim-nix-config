@@ -3,9 +3,7 @@
         settings = {
             event = "InsertEnter";
             config = true;
-            options = {
-                disable_filetype = [ "tex" ];
-            };
+            disable_filetype = [ "tex" ];
         };
     };
 }
