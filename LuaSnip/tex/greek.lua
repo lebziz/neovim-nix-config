@@ -70,5 +70,6 @@ return {
     s({trig=";Y", wordTrig=false, snippetType="autosnippet"}, {t("\\Psi")},{condition=in_mathzone}),
 
     s({trig=";w", wordTrig=false, snippetType="autosnippet"}, {t("\\omega")},{condition=in_mathzone}),
-    s({trig=";W", wordTrig=false, snippetType="autosnippet"}, {t("\\Omega")},{condition=in_mathzone})
+    s({trig=";W", wordTrig=false, snippetType="autosnippet"}, {t("\\Omega")},{condition=in_mathzone}),
+    s({trig=";k", wordTrig=false, snippetType="autosnippet"}, {t("\\kappa")},{condition=in_mathzone})
 }
